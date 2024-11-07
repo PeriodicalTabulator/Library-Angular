@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+    <style>
+    </style>
+</head>
+    <mat-card class="example-card" appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>{{books.name}}</mat-card-title>
+          <mat-card-subtitle>{{books.nameAuthor}}</mat-card-subtitle>
+          <mat-card-subtitle>Dostupných kníh:{{books.dostupnostmnozstvo}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image class="knihaFotka" [src]="books.photo" >
+        <mat-card-content>{{books.obsah}}</mat-card-content>
+        <mat-card-actions>
+            <button mat-fab	 id="tlacidlo" (click)="reserveBook()"  [disabled]="nomore" style="width: 50px; height: 50px;">reserve</button>
+            <br>
+            <button class="button" mat-fab id="tlacidlo" (click)="undoBook()" [disabled]="nomoreundo"  style="width: 50px; height: 50px;">undo</button>
+        </mat-card-actions>
+      </mat-card>
