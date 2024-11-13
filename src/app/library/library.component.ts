@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule,BookComponent, FormsModule],
   template: `
-  <button (click)="goToCart()">Go to Cart</button>
 <section>
 <form>
 <input  type="text" placeholder="Filter by name">
@@ -26,7 +25,6 @@ import { Router } from '@angular/router';
     <input type="text" [(ngModel)]="newBook.photo" name="photo" placeholder="photo-path">
     <input type="text" [(ngModel)]="newBook.nameAuthor" name="author" placeholder="author" required>
     <input type="text" [(ngModel)]="newBook.obsah" name="obsah" placeholder="Obsah" required>
-    <input type="check" [(ngModel)]="newBook.dostupnost" name="dostupnost" required>
     <input type="number" [(ngModel)]="newBook.dostupnostmnozstvo" name="mnozstvo" placeholder="mnozstvo-int" required>
     <button type="submit">Add Book</button>
   </form>
@@ -38,7 +36,10 @@ import { Router } from '@angular/router';
 
 
 export class LibraryComponent {
+  //routing
   constructor(private router: Router) {}
+
+  //interface properties of every element
    BookComponentList: InsideBook[] = [
     {
       "id": 0,
@@ -69,8 +70,10 @@ export class LibraryComponent {
     }
    ];
 
+
    idnumber = 3;
 
+   //new book properties
    newBook = {
     id: this.idnumber,
     name: '',
@@ -84,16 +87,22 @@ export class LibraryComponent {
 
   //add book
   addBook() {
-    console.log('New book:', this.newBook);
-    this.BookComponentList.push(this.newBook)
-    this.idnumber = this.idnumber +1;
-    this.newBook = { id: this.idnumber ,
-      name: '',
-      photo: '',
-      nameAuthor: '',
-      obsah: '',
-      dostupnost: false,
-      dostupnostmnozstvo: 0,}
+    if(this.newBook.dostupnostmnozstvo > 0){
+      this.newBook.dostupnost=true;
+    }else{
+      this.newBook.dostupnost=false;
+    }
+      console.log('New book:', this.newBook);
+      this.BookComponentList.push(this.newBook)
+      this.idnumber = this.idnumber +1;
+      this.newBook = { id: this.idnumber ,
+        name: '',
+        photo: '',
+        nameAuthor: '',
+        obsah: '',
+        dostupnost: false,
+        dostupnostmnozstvo: 0,}
+          
+    
   }
-  goToCart() { this.router.navigate(['/cart']); }
 }

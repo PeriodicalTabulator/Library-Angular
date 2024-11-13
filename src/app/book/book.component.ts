@@ -14,32 +14,36 @@ import { arrRemove } from 'rxjs/internal/util/arrRemove';
   styleUrl: './book.component.css'
 })
 export class BookComponent {
+  
 @Input() books!:InsideBook;
 nomoreundo: boolean = true;
 nomore:boolean = false;
 undoAmount:number = 0;
-if ( dostupnostmnozstvo = 0) {
-  this.nomore = true;
-  this.nomoreundo = true;
-  
-}
+
+
 reserveBook(){
   
-  if(this.books.dostupnostmnozstvo > 0){
+  if(this.books.dostupnostmnozstvo > 0)
+  {
     this.nomoreundo=false;
     this.books.dostupnostmnozstvo = this.books.dostupnostmnozstvo - 1;
     this.undoAmount = this.undoAmount + 1;
     console.log("undo" ,this.undoAmount);
-      console.log("dostupnost" ,this.books.dostupnostmnozstvo);
-      if(this.books.dostupnostmnozstvo == 0){
+    console.log("dostupnost" ,this.books.dostupnostmnozstvo);
+      if(this.books.dostupnostmnozstvo == 0)
+        {
           console.log('no more books');
           this.nomore=true;
-      }
-  }else{
-    this.nomore = true;
+        }
   }
+  else{
+        this.nomore = true;
+      }
 
 }
+
+
+
 undoBook(){
   if(this.undoAmount > 0){
     this.nomoreundo=false;
