@@ -95,13 +95,15 @@ export class LibraryComponent {
       console.log('New book:', this.newBook);
       this.BookComponentList.push(this.newBook)
       this.idnumber = this.idnumber +1;
-      this.newBook = { id: this.idnumber ,
+      this.newBook = {
+        id: this.idnumber ,
         name: '',
         photo: '',
         nameAuthor: '',
         obsah: '',
         dostupnost: false,
-        dostupnostmnozstvo: 0,}
+        dostupnostmnozstvo: 0,
+      }
           
     
   }

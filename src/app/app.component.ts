@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { LibraryComponent } from './library/library.component';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
-import {MatIconRegistry, MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { RouterLinkActive } from '@angular/router';
