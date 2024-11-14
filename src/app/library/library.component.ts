@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BookComponent } from '../book/book.component';
 import { CommonModule } from '@angular/common';
 import { InsideBook } from '../inside-book';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TheLibraryService } from '../the-library.service';
 @Component({
   selector: 'app-library',
   standalone: true,
-  imports: [CommonModule,BookComponent, FormsModule],
+  imports: [CommonModule,BookComponent, FormsModule,],
   template: `
 <section>
 <form>
@@ -37,38 +38,14 @@ import { Router } from '@angular/router';
 
 export class LibraryComponent {
   //routing
-  constructor(private router: Router) {}
-
-  //interface properties of every element
-   BookComponentList: InsideBook[] = [
-    {
-      "id": 0,
-      "name": "FightClub",
-      "photo" : "",
-      "nameAuthor": "we dont talk about fight club",
-      "obsah": "first rule of fight club, never talk about fight club",
-      "dostupnost": true,
-      "dostupnostmnozstvo": 3
-    },
-    {
-      "id": 1,
-      "name": "About Mice and People",
-      "photo" : "",
-      "nameAuthor": "John Steibeck",
-      "obsah": "friend kill a stupid friend gg",
-      "dostupnost": true,
-      "dostupnostmnozstvo": 1
-    },
-    {
-      "id": 2,
-      "name": "Neuromancer",
-      "photo" : "",
-      "nameAuthor": "William Gibson",
-      "obsah": "I steal your soul",
-      "dostupnost": false,
-      "dostupnostmnozstvo": 0
+  constructor(private router: Router, private libraryService: TheLibraryService)
+   { this.BookComponentList = this.libraryService.BookComponentList;
+    
     }
-   ];
+
+  BookComponentList: InsideBook[] = [];
+
+
 
 
    idnumber = 3;
