@@ -4,13 +4,24 @@ import { MatSlideToggleModule, } from '@angular/material/slide-toggle';
 import { MatButtonModule} from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {MatBadgeModule} from '@angular/material/badge';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { trigger, state, style, animate, transition } from '@angular/animations'
 
 @Component({
   selector: 'app-book',
   standalone: true,
   imports: [MatSlideToggleModule, MatButtonModule, MatCardModule, MatBadgeModule],
   templateUrl: './book.component.html',
-  styleUrl: './book.component.css'
+  styleUrl: './book.component.css',
+ animations: [ trigger('slide',[
+   state('open', style({ height: '*', opacity: 1, display: 'block' })), 
+    state('closed', style({ height: '0px', opacity: 0, display: 'none' })),
+     transition('open <=> closed', [ animate('300ms ease-in-out') ]) ]),
+      trigger('rotate', [ state('start', style({ transform: 'rotate(0deg)' })),
+         state('end', style({ transform: 'rotate(180deg)' })),
+          transition('start <=> end',
+             [ animate('500ms ease-in-out') ]) ])]
+  
 })
 export class BookComponent {
   
@@ -18,6 +29,8 @@ export class BookComponent {
   nomoreundo: boolean = true;
   nomore:boolean = false;
   undoAmount:number = 0;
+  isOpen = false;
+  toggle() { this.isOpen = !this.isOpen; }
   
   
   reserveBook(){

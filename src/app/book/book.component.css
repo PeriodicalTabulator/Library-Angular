@@ -1,11 +1,38 @@
-.example-card {
-    max-width: 400px;
-  }
+.maxWidth {
+  max-width: 600px;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+}
+
+.cssBase {
+  width: 100px; 
+  height: auto;
+  margin-right: 20px;
   
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
-  .button{
-    margin-left: 15px;
-  }
+  margin-left: 10px;  
+}
+
+.text-content {
+  flex: 1;
+}
+
+
+.button {
+
+  margin-left: 10px; 
+}
+
+  
+  #triangle {
+     width: auto; height: auto;
+      border-left: 10px solid transparent;
+       border-right: 10px solid transparent;
+        border-bottom: 10px solid black;
+      margin-top: auto;}
+      .obsah{
+        
+        color: black;
+      }

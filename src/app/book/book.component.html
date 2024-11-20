@@ -1,16 +1,23 @@
-<mat-card class="example-card" appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>{{books.name}}</mat-card-title>
-    <mat-card-subtitle>{{books.nameAuthor}}</mat-card-subtitle>
-    <mat-card-subtitle>Dostupných kníh:{{books.dostupnostmnozstvo}}</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image class="knihaFotka" [src]="books.photo" >
+<mat-card class="maxWidth" appearance="outlined">
+  <div class="card-content">
+    <img mat-card-image class="cssBase" [src]="books.photo">
+    
+    <div class="text-content">
+      <mat-card-header>
+        <mat-card-title>{{ books.name }}</mat-card-title>
+        <mat-card-subtitle>{{ books.nameAuthor }}</mat-card-subtitle>
+        <mat-card-subtitle>Dostupných kníh: {{ books.dostupnostmnozstvo }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button class="button" mat-fab (click)="toggle()" style="width: 50px; height: 50px;">
+          <div id="triangle" [@rotate]="isOpen ? 'start' : 'end'"></div>
+        </button>
+        <button mat-fab class="button" (click)="reserveBook()" [disabled]="nomore" style="width: 50px; height: 50px;">reserve</button>
+        <button class="button" mat-fab (click)="undoBook()" [disabled]="nomoreundo" style="width: 50px; height: 50px;">undo</button>
+      </mat-card-actions>
+    </div>
+  </div>
   <mat-card-content>
-    {{books.obsah}}
+    <p id="slide" class="obsah" [@slide]="isOpen ? 'open' : 'closed'">{{ books.obsah }}</p>
   </mat-card-content>
-  <mat-card-actions>
-            <button mat-fab	 id="tlacidlo" (click)="reserveBook()"  [disabled]="nomore" style="width: 50px; height: 50px;">reserve</button>
-            <br>
-            <button class="button" mat-fab id="tlacidlo" (click)="undoBook()" [disabled]="nomoreundo"  style="width: 50px; height: 50px;">undo</button>
-  </mat-card-actions>
 </mat-card>
