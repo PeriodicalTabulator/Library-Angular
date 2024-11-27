@@ -18,7 +18,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     state('closed', style({ height: '0px', opacity: 0, display: 'none' })),
      transition('open <=> closed', [ animate('300ms ease-in-out') ]) ]),
       trigger('rotate', [ state('start', style({ transform: 'rotate(0deg)' })),
-         state('end', style({ transform: 'rotate(180deg)' })),
+         state('end', style({ transform: 'rotate(540deg)' })),
           transition('start <=> end',
              [ animate('500ms ease-in-out') ]) ])]
   

@@ -17,8 +17,11 @@ import { TheLibraryService } from '../the-library.service';
 </form>
 </section>
 <section class="result">
-<div><app-book *ngFor="let book of BookComponentList"  [books]="book"></app-book>
-</div>
+  @if(loading == true){
+    <p>page is loading</p>
+  }
+  @if(loading == false) {<div><app-book *ngFor="let book of bookComponentList"  [books]="book"></app-book>
+    </div>}
 </section>
 
 <form (ngSubmit)="addBook()">
@@ -37,17 +40,21 @@ import { TheLibraryService } from '../the-library.service';
 
 
 export class LibraryComponent {
-  //routing
   constructor(private router: Router, private libraryService: TheLibraryService)
-   { this.BookComponentList = this.libraryService.BookComponentList;
-    
+   { this.bookComponentList = this.libraryService.BookComponentList;
     }
 
-  BookComponentList: InsideBook[] = [];
+onLoading:boolean = true;
+  bookComponentList: InsideBook[] = [];
+loading:boolean = true;
+ngOnInit():void{
+this.libraryService.getBooks().subscribe((books:InsideBook[])=>{this.bookComponentList=books});
+this.loadingDone();
+}
 
-
-
-
+loadingDone(){
+this.onLoading = false;
+}
    idnumber = 3;
 
    //new book properties
@@ -70,7 +77,7 @@ export class LibraryComponent {
       this.newBook.dostupnost=false;
     }
       console.log('New book:', this.newBook);
-      this.BookComponentList.push(this.newBook)
+      this.bookComponentList.push(this.newBook)
       this.idnumber = this.idnumber +1;
       this.newBook = {
         id: this.idnumber ,

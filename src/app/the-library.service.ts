@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InsideBook } from './inside-book';
+import { Observable, of,delay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +36,7 @@ export class TheLibraryService {
     }
    ];
   constructor() { }
+  getBooks():Observable<InsideBook[]>{
+    return of (this.BookComponentList).pipe(delay(2000));
+  }
 }
