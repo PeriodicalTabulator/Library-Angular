@@ -1,26 +1,19 @@
 import { Injectable } from '@angular/core';
 import { InsideBook } from './inside-book';
-import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { delay, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TheLibraryService {
+  private apiUrl = 'localhost:4200';
+  constructor(private http:HttpClient) { }
+  getData():Observable<InsideBook[] | null>{
+    //treba dorobit return
   
-
-  constructor() { }
-
-  getBooks(): Observable<InsideBook[] | null> {
-      map((books: InsideBook[]) => books.map(book => ({
-          ...book,
-           name: book.name.toUpperCase(),
-           nameAuthor: book.nameAuthor.toUpperCase(),
-           obsah: book.obsah.toUpperCase()
-         })))
-    return of(this.BookComponentList).pipe(delay(2000),)
+    
   }
-  
   BookComponentList: InsideBook[] = [
     {
       "id": 0,
@@ -50,7 +43,8 @@ export class TheLibraryService {
       "dostupnostmnozstvo": 0
     }
   ];
+
+ 
 }
 
   
-

@@ -1,0 +1,32 @@
+<section>
+    <form>
+      <input id="search" type="text" placeholder="Filter by name">
+      <button class="primary" type="button">Search</button>
+    </form>
+  </section>
+  
+  <section class="result">
+    <div *ngIf="state === 1; else second">
+      <p>Loading...</p>
+    </div>
+    <ng-template #second >
+      <ng-container *ngIf="state === 2; else third">
+        <app-book *ngFor="let book of bookComponentList" [books]="book"></app-book>
+      </ng-container>
+    </ng-template>
+    <ng-template #third >
+      <p>Error</p>
+    </ng-template>
+    
+  </section>
+  
+  
+  <form (ngSubmit)="addBook()">
+    <input type="text" [(ngModel)]="newBook.name" name="name" placeholder="Name" required>
+    <input type="text" [(ngModel)]="newBook.photo" name="photo" placeholder="photo-path">
+    <input type="text" [(ngModel)]="newBook.nameAuthor" name="author" placeholder="author" required>
+    <input type="text" [(ngModel)]="newBook.obsah" name="obsah" placeholder="Obsah" required>
+    <input type="number" [(ngModel)]="newBook.dostupnostmnozstvo" name="mnozstvo" placeholder="mnozstvo-int" required>
+    <button type="submit">Add Book</button>
+  </form>
+  

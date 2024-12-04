@@ -5,34 +5,12 @@ import { InsideBook } from '../inside-book';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TheLibraryService } from '../the-library.service';
+import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-library',
   standalone: true,
-  imports: [CommonModule,BookComponent, FormsModule,],
-  template: `
-<section>
-<form>
-<input  type="text" placeholder="Filter by name">
-<button class="primary" type="button"> Search </button>
-</form>
-</section>
-<section class="result">
-  @if(loading == true){
-    <p>page is loading</p>
-  }
-  @if(loading == false) {<div><app-book *ngFor="let book of bookComponentList"  [books]="book"></app-book>
-    </div>}
-</section>
-
-<form (ngSubmit)="addBook()">
-    <input type="text" [(ngModel)]="newBook.name" name="name" placeholder="Name" required>
-    <input type="text" [(ngModel)]="newBook.photo" name="photo" placeholder="photo-path">
-    <input type="text" [(ngModel)]="newBook.nameAuthor" name="author" placeholder="author" required>
-    <input type="text" [(ngModel)]="newBook.obsah" name="obsah" placeholder="Obsah" required>
-    <input type="number" [(ngModel)]="newBook.dostupnostmnozstvo" name="mnozstvo" placeholder="mnozstvo-int" required>
-    <button type="submit">Add Book</button>
-  </form>
-  `,
+  imports: [CommonModule,BookComponent, FormsModule,HttpClientModule],
+  templateUrl: './library.component.html',
   styleUrl: './library.component.css'
 })
 
@@ -44,17 +22,20 @@ export class LibraryComponent {
    { this.bookComponentList = this.libraryService.BookComponentList;
     }
 
-onLoading:boolean = true;
-  bookComponentList: InsideBook[] = [];
-loading:boolean = true;
+state:Number = 1;
+
+bookComponentList: InsideBook[] = [];
 ngOnInit():void{
-this.libraryService.getBooks().subscribe((books:InsideBook[])=>{this.bookComponentList=books});
-this.loadingDone();
+this.libraryService.getBooks().subscribe((books:InsideBook[] | null)=>{
+  if(books != null){
+    this.state = 2;
+  }else if (books == null){
+    this.state = 3;
+  }
+});
 }
 
-loadingDone(){
-this.onLoading = false;
-}
+
    idnumber = 3;
 
    //new book properties
