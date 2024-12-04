@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { InsideBook } from '../inside-book';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 @Component({
   selector: 'app-library',
   standalone: true,
@@ -38,36 +39,11 @@ import { Router } from '@angular/router';
 
 
 export class LibraryComponent {
-  constructor(private router: Router) {}
-   BookComponentList: InsideBook[] = [
-    {
-      "id": 0,
-      "name": "FightClub",
-      "photo" : "",
-      "nameAuthor": "we dont talk about fight club",
-      "obsah": "first rule of fight club, never talk about fight club",
-      "dostupnost": true,
-      "dostupnostmnozstvo": 3
-    },
-    {
-      "id": 1,
-      "name": "About Mice and People",
-      "photo" : "",
-      "nameAuthor": "John Steibeck",
-      "obsah": "friend kill a stupid friend gg",
-      "dostupnost": true,
-      "dostupnostmnozstvo": 1
-    },
-    {
-      "id": 2,
-      "name": "Neuromancer",
-      "photo" : "",
-      "nameAuthor": "William Gibson",
-      "obsah": "I steal your soul",
-      "dostupnost": false,
-      "dostupnostmnozstvo": 0
-    }
-   ];
+  constructor(private router: Router, private appService: AppService) {}
+   BookComponentList: InsideBook[] = []
+  
+
+   ngOnInit(): void{this.appService.getBooks().subscribe((books:InsideBook[])=>(this.BookComponentList=books))}
 
    idnumber = 3;
 
