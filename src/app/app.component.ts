@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,11 +8,14 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { Event } from '@angular/router';
 import { LibraryComponent } from './library/library.component';
+import { NgFor } from '@angular/common';
+import { Output } from '@angular/core';
+import { TheLibraryService } from './the-library.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,MatToolbar,MatButtonModule,RouterOutlet, RouterLink, RouterLinkActive,RouterModule,HttpClientModule],
+  imports: [RouterOutlet,MatToolbar,MatButtonModule,RouterOutlet, RouterLink, RouterLinkActive,RouterModule,HttpClientModule,NgFor],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -20,17 +23,16 @@ import { LibraryComponent } from './library/library.component';
 export class AppComponent {
   receivedData: any = null;
 
-  onComponentActivate(component: any) {
-    if (component instanceof LibraryComponent) {
-      component.dataEvent.subscribe((data: any) => {
-        this.receivedData = data;
-      });
-    }
-  }
+  items: string[] = [];
 
-  handleLibraryData(data: any) {
-    console.log('Received data:', data);
-  }
+  constructor(private itemService: TheLibraryService) {}
+
+  ngOnInit() {
+    this.itemService.newItem$.subscribe((newItem: string) => {
+      this.items.push(newItem);
+      console.log('Parent updated items:', this.items);
+    });
+ 
 }
 
-  
+}

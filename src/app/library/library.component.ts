@@ -17,13 +17,16 @@ import { Output } from '@angular/core';
 export class LibraryComponent implements OnInit {
   state: number = 1;
   bookComponentList: InsideBook[] = [];
-  idnumber = 3;
+  idnumber =13 ;
 
-  @Output() dataEvent = new EventEmitter<any>();
+  @Output() newItemEvent = new EventEmitter<string>();
 
-  sendDataParent(){
-    const data = {message: 'Hello World!'};
-    this.dataEvent.emit(data);
+
+  addNewItem(value: string) {
+    if (value) {
+      this.libraryService.emitNewItem(value);
+      console.log('Child emitted:', value);
+    }
   }
 
   newBook: InsideBook = {
@@ -53,9 +56,7 @@ export class LibraryComponent implements OnInit {
             insideBookExists: response?.insideBook !== undefined,
             insideBookLength: response?.insideBook?.length
           });
-
           this.state = 3;
-
         }
       },
       error: (error: any) => {

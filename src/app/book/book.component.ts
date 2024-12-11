@@ -7,6 +7,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { trigger, state, style, animate, transition } from '@angular/animations'
 
+
 @Component({
   selector: 'app-book',
   standalone: true,
@@ -30,9 +31,9 @@ export class BookComponent {
   nomore:boolean = false;
   undoAmount:number = 0;
   isOpen = false;
-  toggle() { this.isOpen = !this.isOpen; }
-  
-  
+  toggle() { this.isOpen = !this.isOpen; 
+  }
+
   reserveBook(){
     if(this.books.dostupnostmnozstvo > 0)
     {
@@ -52,8 +53,6 @@ export class BookComponent {
         }
   
   }
-  
-  
   
   undoBook(){
     if(this.undoAmount > 0){

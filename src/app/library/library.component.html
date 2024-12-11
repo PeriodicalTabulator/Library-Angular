@@ -19,7 +19,6 @@
     </ng-template>
     
   </section>
-  <button (click)="sendDataParent()">Notify parent</button>
   
   <form (ngSubmit)="addBook()">
     <input type="text" [(ngModel)]="newBook.name" name="name" placeholder="Name" required>
@@ -29,4 +28,8 @@
     <input type="number" [(ngModel)]="newBook.dostupnostmnozstvo" name="mnozstvo" placeholder="mnozstvo-int" required>
     <button type="submit">Add Book</button>
   </form>
+  <p></p>
+  <label for="item-input">Add an item:</label>
+<input type="text" id="item-input" #newItem>
+<button type="button" (click)="addNewItem(newItem.value)">Add to parent's list</button>
   
