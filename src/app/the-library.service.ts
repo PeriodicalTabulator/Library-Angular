@@ -1,56 +1,33 @@
 import { Injectable } from '@angular/core';
 import { InsideBook } from './inside-book';
 import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { delay, map,tap,catchError} from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TheLibraryService {
-  
 
-  constructor() { }
+  private apiUrl = 'https://run.mocky.io/v3/bda0a978-ecf5-41c8-a2d3-7bc41f155e4e'; 
+  serviceBookList!: InsideBook[];
 
-  getBooks(): Observable<InsideBook[] | null> {
-      map((books: InsideBook[]) => books.map(book => ({
-          ...book,
-           name: book.name.toUpperCase(),
-           nameAuthor: book.nameAuthor.toUpperCase(),
-           obsah: book.obsah.toUpperCase()
-         })))
-    return of(this.BookComponentList).pipe(delay(2000),)
+  constructor(private http: HttpClient) { }
+
+  // Method to get books
+  getBooks(): Observable<{ insideBook: InsideBook[] }> {
+   console.log('Attempting to fetch books from URL:', this.apiUrl);
+    return this.http.get<{ insideBook: InsideBook[] }>(this.apiUrl).pipe(
+      tap(response => console.log('Raw API response:', response)),
+      catchError(error => {
+        console.error('HTTP Error:', error);
+        return throwError(error);
+      })
+    );
   }
-  
-  BookComponentList: InsideBook[] = [
-    {
-      "id": 0,
-      "name": "FightClub",
-      "photo": "https://cdn11.bigcommerce.com/s-gibnfyxosi/images/stencil/1280x1280/products/111890/113654/513PNeKaKrL__02114.1615558356.jpg?c=1",
-      "nameAuthor": "we dont talk about fight club",
-      "obsah": "first rule of fight club, never talk about fight club",
-      "dostupnost": true,
-      "dostupnostmnozstvo": 3
-    },
-    {
-      "id": 1,
-      "name": "About Mice and People",
-      "photo": "https://th.bing.com/th/id/OIP.-8KH0RbN08qbOLuJbveIWQHaIp?rs=1&pid=ImgDetMain",
-      "nameAuthor": "John Steibeck",
-      "obsah": "friend kill a stupid friend gg",
-      "dostupnost": true,
-      "dostupnostmnozstvo": 1
-    },
-    {
-      "id": 2,
-      "name": "Neuromancer",
-      "photo": "https://th.bing.com/th/id/OIP.eMV8yFKBLX2YVesCR7MZcQHaLT?rs=1&pid=ImgDetMain",
-      "nameAuthor": "William Gibson",
-      "obsah": "I steal your soul",
-      "dostupnost": false,
-      "dostupnostmnozstvo": 0
-    }
-  ];
+
+  // Method to post book
+  postBook(book: InsideBook): Observable<InsideBook> { 
+     return this.http.post<InsideBook>(this.apiUrl, book); }
 }
-
-  
-

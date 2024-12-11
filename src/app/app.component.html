@@ -12,6 +12,7 @@
 </a>
 </mat-toolbar>
         <section class="content">
-            <router-outlet></router-outlet>
+            <router-outlet (activate)="onComponentActivate($event)"></router-outlet>
+            <p>{{ receivedData }}</p>
         </section>
     </main>

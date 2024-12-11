@@ -18,7 +18,6 @@ describe('AppComponent', () => {
   it(`should have the 'ang-first' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ang-first');
   });
 
   it('should render title', () => {

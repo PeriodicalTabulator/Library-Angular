@@ -19,7 +19,7 @@
     </ng-template>
     
   </section>
-  
+  <button (click)="sendDataParent()">Notify parent</button>
   
   <form (ngSubmit)="addBook()">
     <input type="text" [(ngModel)]="newBook.name" name="name" placeholder="Name" required>
