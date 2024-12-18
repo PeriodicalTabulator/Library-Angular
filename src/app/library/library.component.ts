@@ -20,21 +20,10 @@ export class LibraryComponent implements OnInit {
   idnumber =13 ;
   @Output() newItemEvent = new EventEmitter<string>();
 
-veryNewBook:any;
-  addNewItem(value: string) {
-    if (value) {
-      this.libraryService.emitNewItem(value);
-      console.log('Child emitted:', value);
-    }
-  }
 
   constructor(private router: Router, private libraryService: TheLibraryService) {}
 
   ngOnInit(): void {
-    this.libraryService.bookObject$.subscribe(newBook =>{
-      this.veryNewBook = newBook;
-      console.log("newBook came", newBook);
-    })
     this.libraryService.getBooks().subscribe({
       next: (response: { insideBook: InsideBook[] }) => {
         console.log('API Response:', response); // Debug log

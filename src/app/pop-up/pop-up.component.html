@@ -1,19 +1,8 @@
 <form (ngSubmit)="addBook()">
-    <input type="text" [(ngModel)]="newBook.name" name="name" placeholder="Name" required>
+  <input type="text" [(ngModel)]="newBook.name" name="name" placeholder="Name" required>
     <input type="text" [(ngModel)]="newBook.photo" name="photo" placeholder="photo-path">
     <input type="text" [(ngModel)]="newBook.nameAuthor" name="author" placeholder="author" required>
     <input type="text" [(ngModel)]="newBook.obsah" name="obsah" placeholder="Obsah" required>
     <input type="number" [(ngModel)]="newBook.dostupnostmnozstvo" name="mnozstvo" placeholder="mnozstvo-int" required>
-    <mat-form-field>
-        <mat-select placeholder="Genre">
-          <mat-option>
-            <mat-option value="option1">Fantasy</mat-option>
-            <mat-option value="option2">Sci-fi</mat-option>
-            <mat-option value="option3">Thriller</mat-option>
-            <mat-option value="option4">Romance</mat-option>
-            <mat-option value="option5">History</mat-option>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
     <button type="submit">Add Book</button>
   </form>

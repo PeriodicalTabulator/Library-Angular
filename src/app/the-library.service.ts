@@ -14,16 +14,10 @@ export class TheLibraryService {
   private newItemSource = new Subject<string>();
   newItem$ = this.newItemSource.asObservable();
 
-  private newBookObject = new Subject<any>();
-  bookObject$ = this.newBookObject.asObservable();
-
   emitNewItem(item: string) {
     this.newItemSource.next(item);
   }
 
-  emitNewBook(newBook: any){
-    this.newBookObject.next(newBook);
-  }
 
 
 
