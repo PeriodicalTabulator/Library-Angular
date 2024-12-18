@@ -19,16 +19,6 @@
     </ng-template>
     
   </section>
-  
-  <form (ngSubmit)="addBook()">
-    <input type="text" [(ngModel)]="newBook.name" name="name" placeholder="Name" required>
-    <input type="text" [(ngModel)]="newBook.photo" name="photo" placeholder="photo-path">
-    <input type="text" [(ngModel)]="newBook.nameAuthor" name="author" placeholder="author" required>
-    <input type="text" [(ngModel)]="newBook.obsah" name="obsah" placeholder="Obsah" required>
-    <input type="number" [(ngModel)]="newBook.dostupnostmnozstvo" name="mnozstvo" placeholder="mnozstvo-int" required>
-    <button type="submit">Add Book</button>
-  </form>
-  <p></p>
   <label for="item-input">Add an item:</label>
 <input type="text" id="item-input" #newItem>
 <button type="button" (click)="addNewItem(newItem.value)">Add to parent's list</button>

@@ -11,11 +11,13 @@ import { LibraryComponent } from './library/library.component';
 import { NgFor } from '@angular/common';
 import { Output } from '@angular/core';
 import { TheLibraryService } from './the-library.service';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { PopUpComponent } from './pop-up/pop-up.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,MatToolbar,MatButtonModule,RouterOutlet, RouterLink, RouterLinkActive,RouterModule,HttpClientModule,NgFor],
+  imports: [RouterOutlet,MatToolbar,MatButtonModule,RouterOutlet, RouterLink, RouterLinkActive,RouterModule,HttpClientModule,NgFor,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -25,14 +27,16 @@ export class AppComponent {
 
   items: string[] = [];
 
-  constructor(private itemService: TheLibraryService) {}
+  constructor(private itemService: TheLibraryService, private bottomSheet: MatBottomSheet) {}
 
   ngOnInit() {
     this.itemService.newItem$.subscribe((newItem: string) => {
       this.items.push(newItem);
       console.log('Parent updated items:', this.items);
     });
- 
 }
 
+popUpOpen(){
+  this.bottomSheet.open(PopUpComponent);
+}
 }

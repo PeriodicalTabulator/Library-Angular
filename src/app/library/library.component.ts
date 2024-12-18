@@ -18,10 +18,9 @@ export class LibraryComponent implements OnInit {
   state: number = 1;
   bookComponentList: InsideBook[] = [];
   idnumber =13 ;
-
   @Output() newItemEvent = new EventEmitter<string>();
 
-
+veryNewBook:any;
   addNewItem(value: string) {
     if (value) {
       this.libraryService.emitNewItem(value);
@@ -29,19 +28,13 @@ export class LibraryComponent implements OnInit {
     }
   }
 
-  newBook: InsideBook = {
-    id: this.idnumber,
-    name: '',
-    photo: '',
-    nameAuthor: '',
-    obsah: '',
-    dostupnost: false,
-    dostupnostmnozstvo: 0
-  };
-
   constructor(private router: Router, private libraryService: TheLibraryService) {}
 
   ngOnInit(): void {
+    this.libraryService.bookObject$.subscribe(newBook =>{
+      this.veryNewBook = newBook;
+      console.log("newBook came", newBook);
+    })
     this.libraryService.getBooks().subscribe({
       next: (response: { insideBook: InsideBook[] }) => {
         console.log('API Response:', response); // Debug log
@@ -67,36 +60,6 @@ export class LibraryComponent implements OnInit {
           statusText: error.statusText
         });
         this.state = 3;
-      }
-    });
-  }
-
-  addBook(): void {
-    //dostupnost true or false
-    if (this.newBook.dostupnostmnozstvo > 0) {
-      this.newBook.dostupnost = true;
-    } else {
-      this.newBook.dostupnost = false;
-    }
-// add new book to mocky
-    this.libraryService.postBook(this.newBook).subscribe({
-      next: (response: InsideBook) => {
-        this.bookComponentList.push(response);
-        this.idnumber += 1;
-        this.newBook = {
-          id: this.idnumber,
-          name: '',
-          photo: '',
-          nameAuthor: '',
-          obsah: '',
-          dostupnost: false,
-          dostupnostmnozstvo: 0
-        };
-        //book property
-        console.log('New book:', this.newBook);
-      },
-      error: (error: any) => {
-        console.error('Error adding book:', error);
       }
     });
   }
