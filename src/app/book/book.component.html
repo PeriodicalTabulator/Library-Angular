@@ -12,8 +12,9 @@
         <button class="button" mat-fab (click)="toggle()" style="width: 50px; height: 50px;">
           <div id="triangle" [@rotate]="isOpen ? 'start' : 'end'"></div>
         </button>
-        <button mat-fab class="button" (click)="reserveBook()" [disabled]="nomore" style="width: 50px; height: 50px;">reserve</button>
-        <button class="button" mat-fab (click)="undoBook()" [disabled]="nomoreundo" style="width: 50px; height: 50px;">undo</button>
+        <button mat-fab class="button" (click)="reserveBook()" [disabled]="nomore" style="width: 50px; height: 50px;">Reserve</button>
+        <button class="button" mat-fab (click)="undoBook()" [disabled]="nomoreundo" style="width: 50px; height: 50px;">Undo</button>
+        <button class="button" mat-fab (click)="deleteBook()" style="width: 50px; height: 50px;">Delete</button>
       </mat-card-actions>
     </div>
   </div>

@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatBadgeModule} from '@angular/material/badge';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { trigger, state, style, animate, transition } from '@angular/animations'
+import { TheLibraryService } from '../the-library.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   
 })
 export class BookComponent {
-  
+
   @Input() books!:InsideBook;
   nomoreundo: boolean = true;
   nomore:boolean = false;
@@ -33,7 +34,7 @@ export class BookComponent {
   isOpen = false;
   toggle() { this.isOpen = !this.isOpen; 
   }
-
+constructor(private libraryService: TheLibraryService){}
   reserveBook(){
     if(this.books.dostupnostmnozstvo > 0)
     {
@@ -69,4 +70,13 @@ export class BookComponent {
      }
      
   }
-}
+  deleteBook(){
+        this.libraryService.deleteBook(this.books.id).subscribe({
+          next: () => {
+            console.log('Book deleted successfully');
+         alert("Book deleted");
+          }
+        });
+      }
+    }
+  

@@ -24,32 +24,17 @@ export class LibraryComponent implements OnInit {
   constructor(private router: Router, private libraryService: TheLibraryService) {}
 
   ngOnInit(): void {
-    this.libraryService.getBooks().subscribe({
-      next: (response: { insideBook: InsideBook[] }) => {
-        console.log('API Response:', response); // Debug log
-
-        if (response && response.insideBook && response.insideBook.length > 0) {
-          this.bookComponentList = response.insideBook;
-          this.state = 2;
-        } else {
-          console.log('No books found'); // Debug log
-          console.log('Response details:', {
-            hasResponse: !!response,
-            insideBookExists: response?.insideBook !== undefined,
-            insideBookLength: response?.insideBook?.length
-          });
-          this.state = 3;
-        }
-      },
-      error: (error: any) => {
-        console.error('fetch detail error:', error);
-        console.log('Error details:', {
-          message: error.message,
-          status: error.status,
-          statusText: error.statusText
-        });
+    this.libraryService.getBooks().subscribe((insideBook: InsideBook[]) => {
+      this.bookComponentList = insideBook;
+      console.log("before if",this.bookComponentList);
+      if(insideBook != null){
+        this.state = 2;
+        this.bookComponentList = insideBook;
+        console.log("after if",this.bookComponentList);
+      }else{
         this.state = 3;
       }
     });
+
   }
 }

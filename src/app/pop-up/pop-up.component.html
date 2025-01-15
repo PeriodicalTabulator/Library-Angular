@@ -1,8 +1,8 @@
-<form (ngSubmit)="addBook()">
-  <input type="text" [(ngModel)]="newBook.name" name="name" placeholder="Name" required>
-    <input type="text" [(ngModel)]="newBook.photo" name="photo" placeholder="photo-path">
-    <input type="text" [(ngModel)]="newBook.nameAuthor" name="author" placeholder="author" required>
-    <input type="text" [(ngModel)]="newBook.obsah" name="obsah" placeholder="Obsah" required>
-    <input type="number" [(ngModel)]="newBook.dostupnostmnozstvo" name="mnozstvo" placeholder="mnozstvo-int" required>
-    <button type="submit">Add Book</button>
-  </form>
+<form [formGroup]="bookForm" (ngSubmit)="addBook()">
+  <input type="text" formControlName="name" placeholder="Name" >
+  <input type="text" formControlName="photo" placeholder="Photo Path">
+  <input type="text" formControlName="nameAuthor" placeholder="Author" required>
+  <input type="text" formControlName="obsah" placeholder="Obsah" required>
+  <input type="number" formControlName="dostupnostmnozstvo" placeholder="Mnozstvo" required>
+  <button type="submit" [disabled]="bookForm.invalid">Add Book</button>
+</form>

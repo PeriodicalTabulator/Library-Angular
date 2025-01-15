@@ -1,9 +1,9 @@
 export interface InsideBook {
-    id: number;
+    id: string;
     name: string;
     photo: string;
-    nameAuthor:string;
-    obsah:string;
-    dostupnost:boolean;
-    dostupnostmnozstvo:number;
-}
+    nameAuthor: string;
+    obsah: string;
+    dostupnost: boolean;
+    dostupnostmnozstvo: number;
+  }
